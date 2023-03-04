@@ -14,9 +14,22 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
     setTodos(newTodos);
   };
 
+  const toggleTodo: TodosStore['toggleTodo'] = (id) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+
+      return todo;
+    });
+
+    setTodos(newTodos);
+  };
+
   const store: TodosStore = {
     todos,
-    removeTodo
+    removeTodo,
+    toggleTodo
   };
 
   return (
