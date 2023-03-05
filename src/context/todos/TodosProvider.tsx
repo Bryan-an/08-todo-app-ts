@@ -34,12 +34,18 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
   const changeFilter: TodosStore['changeFilter'] = (filter) =>
     setFilterSelected(filter);
 
+  const removeCompletedTodos: TodosStore['removeCompletedTodos'] = () => {
+    const newTodos = todos.filter((todo) => !todo.completed);
+    setTodos(newTodos);
+  };
+
   const store: TodosStore = {
     todos,
     filterSelected,
     removeTodo,
     toggleTodo,
-    changeFilter
+    changeFilter,
+    removeCompletedTodos
   };
 
   return (
