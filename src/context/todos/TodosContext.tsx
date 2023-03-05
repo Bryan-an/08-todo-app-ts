@@ -9,6 +9,7 @@ export interface TodosStore {
   toggleTodo: (id: Todo['id']) => void;
   changeFilter: (filter: TodoFilter) => void;
   removeCompletedTodos: () => void;
+  addTodo: (todo: Todo) => void;
 }
 
 export const TodosContext = createContext({} as TodosStore);

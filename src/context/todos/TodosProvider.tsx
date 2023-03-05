@@ -39,13 +39,22 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
     setTodos(newTodos);
   };
 
+  const addTodo: TodosStore['addTodo'] = (todo) => {
+    todo.id = crypto.randomUUID();
+    todo.completed = false;
+
+    const newTodos = [...todos, todo];
+    setTodos(newTodos);
+  };
+
   const store: TodosStore = {
     todos,
     filterSelected,
     removeTodo,
     toggleTodo,
     changeFilter,
-    removeCompletedTodos
+    removeCompletedTodos,
+    addTodo
   };
 
   return (
