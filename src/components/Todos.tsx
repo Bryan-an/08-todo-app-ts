@@ -1,14 +1,19 @@
-import { Todo as TodoModel } from '../models';
+import { TODO_FILTERS } from '../constants';
+import { useTodosStore } from '../hooks';
 import { Todo } from './Todo';
 
-interface Props {
-  todos: TodoModel[];
-}
+export const Todos: React.FC = () => {
+  const { todos, filterSelected } = useTodosStore();
 
-export const Todos: React.FC<Props> = ({ todos }) => {
+  const filteredTodos = todos.filter((todo) => {
+    if (filterSelected === TODO_FILTERS.ACTIVE) return !todo.completed;
+    if (filterSelected === TODO_FILTERS.COMPLETED) return todo.completed;
+    return todo;
+  });
+
   return (
     <ul className="todo-list">
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <li key={todo.id} className={`${todo.completed ? 'completed' : ''}`}>
           <Todo {...todo} />
         </li>
